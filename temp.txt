@@ -1,0 +1,53 @@
+# The CurrencyConverter class takes an API key as an argument, and has a convert method that takes a from_currency,
+# to_currency, and amount as arguments, and returns the conversion rate.
+class CurrencyConverter:
+    def __init__(self, api_key):
+        """
+        This function takes in an api_key and assigns it to the variable self.api_key
+
+        :param api_key: Your API key
+        """
+        self.api_key = api_key
+
+    def convert(self, from_currency, to_currency, amount):
+        """
+        It takes in a from_currency, to_currency, and amount, and returns the conversion rate
+
+        :param from_currency: The currency you want to convert from
+        :param to_currency: The currency you want to convert to
+        :param amount: The amount of the currency you want to convert
+        :return: The conversion rate is being returned.
+        """
+        # base_url variable to store url
+        base_url = "https://api.apilayer.com/exchangerates_data/convert?"
+        # main_url variable to store complete url address
+        main_url = base_url + f"to={to_currency}&from={from_currency}&amount={amount}"
+        # This is the header for the request.
+        payload = {}
+        headers = {
+            "apikey": "gqcj9s0B9RnMLkjXlMEcHoozSFE2842G"
+        }
+        # get method of requests module
+        response = requests.request("GET", main_url, headers=headers, data=payload)
+        # json method of response object
+        # convert json format data into
+        # python format data
+        response = response.json()
+        # getting the conversion rate from the json data
+        conversion_rate = response['result']
+        return conversion_rate
+
+
+# This is a way to run the code in the file.
+if __name__ == '__main__':
+    currency_converter = CurrencyConverter("gqcj9s0B9RnMLkjXlMEcHoozSFE2842G")
+    print(currency_converter.convert('USD', 'INR', 1))
+
+[(100, 'EUR'), (102.3589, 'USD', 1669049943), (98.1253, 'CHF', 1669049943), (86.874, 'GBP', 1669049943), '2022-11-21']
+[(100, 'GBP'), (2420.9671508931, 'czk', 24.209671508931), (98.18520451054201, 'chf', 0.98185204510542), (376.76252574261, 'aed', 3.7676252574261), 'Mon, 21 Nov 2022 11:55:02 GMT']
+
+['AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTC', 'BTN', 'BWP', 'BYN', 'BYR', 'BZD', 'CAD', 'CDF', 'CHF', 'CLF', 'CLP', 'CNY', 'COP', 'CRC', 'CUC', 'CUP', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ERN', 'ETB', 'EUR', 'FJD', 'FKP', 'GBP', 'GEL', 'GGP', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'IMP', 'INR', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD', 'JOD', 'JPY', 'KES', 'KGS', 'KHR', 'KMF', 'KPW', 'KRW', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LTL', 'LVL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRO', 'MUR', 'MVR', 'MWK', 'MXN', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NOK', 'NPR', 'NZD', 'OMR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR', 'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 'SEK', 'SGD', 'SHP', 'SLE', 'SLL', 'SOS', 'SRD', 'STD', 'SVC', 'SYP', 'SZL', 'THB', 'TJS', 'TMT', 'TND', 'TOP', 'TRY', 'TTD', 'TWD', 'TZS', 'UAH', 'UGX', 'USD', 'UYU', 'UZS', 'VEF', 'VND', 'VUV', 'WST', 'XAF', 'XAG', 'XAU', 'XCD', 'XDR', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMK', 'ZMW', 'ZWL']
+[(100, 'GBP'), (2420.9671508931, 'czk', 24.209671508931), (98.18520451054201, 'chf', 0.98185204510542), (376.76252574261, 'aed', 3.7676252574261), 'Mon, 21 Nov 2022 11:55:02 GMT']
+
+['usd', 'gbp', 'cad', 'jpy', 'aud', 'chf', 'omr', 'ils', 'ngn', 'uzs', 'etb', 'ttd', 'pgk', 'bwp', 'sek', 'sgd', 'huf', 'byn', 'tjs', 'gmd', 'cve', 'zmw', 'khr', 'dop', 'cny', 'isk', 'lyd', 'clp', 'bsd', 'xpf', 'all', 'scr', 'ang', 'lbp', 'mxn', 'kzt', 'htg', 'bnd', 'kmf', 'lsl', 'tzs', 'mnt', 'jod', 'php', 'xaf', 'amd', 'uyu', 'jmd', 'ssp', 'mru', 'nzd', 'try', 'vnd', 'kgs', 'mga', 'srd', 'ghs', 'cup', 'nok', 'qar', 'czk', 'rub', 'rsd', 'nio', 'sbd', 'mwk', 'yer', 'ves', 'bdt', 'ron', 'dzd', 'ars', 'stn', 'bif', 'mmk', 'mur', 'aed', 'idr', 'krw', 'uah', 'crc', 'bzd', 'gnf', 'szl', 'sos', 'brl', 'inr', 'npr', 'zar', 'azn', 'pyg', 'gyd', 'rwf', 'ern', 'wst', 'bam', 'dkk', 'lkr', 'tnd', 'twd', 'iqd', 'afn', 'nad', 'syp', 'mop', 'pkr', 'bgn', 'pen', 'tmt', 'svc', 'xcd', 'lak', 'gtq', 'sar', 'pln', 'gip', 'gel', 'mkd', 'awg', 'aoa', 'mvr', 'bhd', 'egp', 'hrk', 'mro', 'cop', 'bbd', 'djf', 'hnl', 'kes', 'hkd', 'mad', 'myr', 'mdl', 'pab', 'fjd', 'cdf', 'mzn', 'ugx', 'vuv', 'kwd', 'thb', 'xof', 'irr', 'bob', 'lrd', 'sdg', 'top']
+[(100, 'GBP'), (2420.9671508931, 'czk', 24.209671508931), (98.18520451054201, 'chf', 0.98185204510542), (376.76252574261, 'aed', 3.7676252574261), 'Mon, 21 Nov 2022 11:55:02 GMT']
