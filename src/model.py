@@ -155,13 +155,16 @@ class CurrencyConverterAPI(CurrencyConverter):
         :type to_currency: str
         :return: A list of dictionaries
         """
-        base_url = "https://api.apilayer.com/exchangerates_data/convert?"
-        main_url = base_url + f"to={to_currency}&from={self.current_currency}&amount={self.value}"
-        payload = {}
+        base_url = "https://api.apilayer.com/exchangerates_data/convert"
+        payload = {
+            "to": to_currency,
+            "from": self.current_currency,
+            "amount": self.value
+        }
         headers = {
             "apikey": self.source
         }
-        response = requests.request("GET", main_url, headers=headers, data=payload)
+        response = requests.get(base_url, params=payload, headers=headers)
         response = response.json()
         return response
 
@@ -211,7 +214,9 @@ class CurrencyConverterAPI(CurrencyConverter):
 
 
 if __name__ == '__main__':
-    converter = CurrencyConverterFile("../data/conversions.json", 100, "usd", ["jpy", "gbp"])
-    print(converter.__str__() + "\n")
-    converter = CurrencyConverterAPI("gqcj9s0B9RnMLkjXlMEcHoozSFE2842G", 100, "usd", ["eur", "gbp"])
-    print(converter.__str__())
+    # converter = CurrencyConverter("conversion_rates.json")
+    converter = CurrencyConverterAPI("gqcj9s0B9RnMLkjXlMEcHoozSFE2842G")
+    converter.value = 1000
+    converter.current_currency = "usd"
+    converter.to_currency = ["eur", "gbp"]
+    print(converter)
