@@ -72,11 +72,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLabel" name="output">
-         <property name="text">
-          <string>Konversion durchführen ...</string>
-         </property>
-        </widget>
+        <widget class="QTextBrowser" name="output"/>
        </item>
       </layout>
      </widget>

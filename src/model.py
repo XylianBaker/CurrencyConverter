@@ -5,6 +5,8 @@
 # Date: 21.11.2022 Version: 1.0
 
 import json
+from typing import List
+
 import requests
 
 
@@ -117,18 +119,17 @@ class CurrencyConverterFile(CurrencyConverter):
 
     def __str__(self):
         """
-        It takes the value and currency of the object, converts it to all other currencies and returns a string with the
-        converted values
-        :return: The return value is a list of tuples. Each tuple contains the converted amount, the currency and the
-        exchange rate.
+        It converts the value of the object into the currencies specified in the list of currencies and returns a list of
+        tuples containing the converted value, the currency and the exchange rate
+        :return: The return value is a string.
         """
         converted_amounts = self.convert()
-        out = f"{self.value} {self.current_currency.upper()} entsprechen \n"
+        out = f"<b>{self.value} {self.current_currency.upper()}</b> entsprechen <br/><ul>"
         for converted_amount in converted_amounts:
             if converted_amount == converted_amounts[-1]:
-                out += f"Stand: {converted_amount}"
+                out += f"</ul><br/>Stand: {converted_amount}"
             else:
-                out += f"\t{converted_amount[0]} {converted_amount[1].upper()} (Kurs: {converted_amount[2]}) \n"
+                out += f"<li><b>{converted_amount[0]} {converted_amount[1].upper()}</b> (Kurs: {converted_amount[2]})</li>"
         return out
 
 
@@ -198,18 +199,17 @@ class CurrencyConverterAPI(CurrencyConverter):
 
     def __str__(self):
         """
-        The function converts the amount of the current currency into all other currencies and returns a string with the
-        converted amounts.
-        :return: The return value is a list of tuples. Each tuple contains the converted amount, the currency and the
-        exchange rate.
+        It converts the value of the object into the currencies specified in the list of currencies and returns a list of
+        tuples containing the converted value, the currency and the exchange rate
+        :return: The return value is a string.
         """
         converted_amounts = self.convert()
-        out = f"{self.value} {self.current_currency.upper()} entsprechen \n\n"
+        out = f"<b>{self.value} {self.current_currency.upper()}</b> entsprechen <br/><ul>"
         for converted_amount in converted_amounts:
             if converted_amount == converted_amounts[-1]:
-                out += f"\nStand: {converted_amount}"
+                out += f"</ul><br/>Stand: {converted_amount}"
             else:
-                out += f"\t * {converted_amount[0]} {converted_amount[1].upper()} (Kurs: {converted_amount[2]}) \n"
+                out += f"<li><b>{converted_amount[0]} {converted_amount[1].upper()}</b> (Kurs: {converted_amount[2]})</li>"
         return out
 
 
